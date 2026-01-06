@@ -1,5 +1,10 @@
 !!!! MAKE SURE TO CREATE ARCHIVE BACKUP BEFORE PROCEEDING. THIS WILL NUKE YOUR ROUTER SETTINGS !!!!
 
+
+<img width="2074" height="1413" alt="exroot" src="https://github.com/user-attachments/assets/dba9ec11-e7ec-48e4-8226-429054f78122" />
+
+
+
 The script will:
 
      Verify your router model
