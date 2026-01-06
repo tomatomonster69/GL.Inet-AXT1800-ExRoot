@@ -36,7 +36,7 @@ What the Script Does
 
     Package Management:
         Installs required packages: block-mount, kmod-fs-ext4, e2fsprogs, fdisk, swap-utils
-      ⚠️Removes GL.iNet storage packages that interfere with extroot. Only use if you do not play to run NFS or SMB 
+      ⚠️Removes GL.iNet storage packages that interfere with extroot. Only use if you do not plan to run NFS or SMB 
 
  
 
