@@ -6,9 +6,16 @@
 
 
 
-To run simply save as exroot.sh on /root  
-run: chmod +x exroot.sh # this will make file executable
-run: ./exroot.sh
+To run simply copy script and save as exroot.sh on /root  
+run: 
+
+     chmod +x exroot.sh # this will make file executable
+run: 
+     
+     ./exroot.sh # to run
+OR copy direcly and run 
+
+     wget -O exroot.sh https://github.com/tomatomonster69/GL.Inet-AXT1800-ExRoot/blob/main/exroot.sh && chmod +x exroot.sh && ./exroot.sh
 
 
 The script will:
