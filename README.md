@@ -69,17 +69,10 @@ Troubleshooting #1. Run these commands to nuke the current data on the SD Card i
      mkswap -f /dev/mmcblk0p1
  
 
-
-Troubleshooting #2.
-
-     # WARNING: This will destroy all data on the SD card!
-     # Unmount all partitions first
      umount /dev/mmcblk0p1 /dev/mmcblk0p2 2>/dev/null || true
 
-     # Disable any swap
      swapoff -a 2>/dev/null || true
 
-     # Wipe the partition table
      dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=1
      sync
 
@@ -104,10 +97,8 @@ Troubleshooting #2.
      sync
      sleep 3
 
-     # Force kernel to re-read partition table
      blockdev --rereadpt /dev/mmcblk0 2>/dev/null || true
 
-     # Now try creating swap again
      mkswap /dev/mmcblk0p1
      mkfs.ext4 -F /dev/mmcblk0p2
  
