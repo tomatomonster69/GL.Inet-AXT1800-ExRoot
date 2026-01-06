@@ -36,16 +36,16 @@ What the Script Does
 
     Package Management:
         Installs required packages: block-mount, kmod-fs-ext4, e2fsprogs, fdisk, swap-utils
-        Removes GL.iNet storage packages that interfere with extroot 
+      ⚠️Removes GL.iNet storage packages that interfere with extroot. Only use if you do not play to run NFS or SMB 
 
  
 
 SD Card Preparation:
 
-    Detects SD card device (typically /dev/mmcblk0)
-    Creates two partitions:
-        Partition 1: 1GB swap space
-        Partition 2: Remaining space for ext4 root filesystem
+  ##  Detects SD card device (typically /dev/mmcblk0)
+  ##  Creates two partitions:
+  ##      Partition 1: 1GB swap space
+  ##      Partition 2: Remaining space for ext4 root filesystem
 
  
 
@@ -117,13 +117,10 @@ Boot Problems:
     If router fails to boot, remove SD card and it will boot from internal storage
     Check that delay_root is set appropriately in fstab
 
+If you experience problems:
 
-While most SD cards should work, some users have reported issues with certain brands/models 
-
-. If you experience problems:
-
-    Try a different SD card
-    Use a reputable brand like SanDisk or Samsung
+     1.Try a different SD card
+     2.Use a reputable brand like SanDisk or Samsung
 
 Safety Notes
 
@@ -133,26 +130,15 @@ Safety Notes
     ⚠️ Boot Fallback: If SD card fails, remove it to boot from internal storage
     ⚠️ Power Stability: Use a stable power source during the process
 
-Post-Setup Benefits
-
-With extroot configured, you can:
-
-    Install additional packages that require more storage 
-
-Store Docker containers and images (if using Docker) 
-
-    Run applications that need more disk space
-    Enjoy significantly expanded storage capacity
-
+_________________________________________________________________________________________________________________________
 Contributing
 
 Feel free to submit issues and pull requests. For major changes, please open an issue first to discuss what you would like to change.
 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
-References
+References. 
 
-    Based on OpenWrt extroot configuration documentation 
 
 Optimized for GL.iNet AXT1800 hardware specifications 
 Addresses known limitations with SD card hot-plug support 
