@@ -5,6 +5,12 @@
 
 
 
+
+To run simply save as exroot.sh on /root  
+run: chmod +x exroot.sh # this will make file executable
+run: ./exroot.sh
+
+
 The script will:
 
      Verify your router model
@@ -42,25 +48,61 @@ Configuration:
     Sets appropriate boot delays for GL.iNet firmware
     Copies existing overlay data to new partition 
 
-Troubleshooting
-Common Issues
+Troubleshooting #1. Run these commands to nuke the current data on the SD Card if it was previously mounted. 
 
-     
+     lsof /dev/mmcblk0p1 2>/dev/null || echo "No processes found using partition"
+     mount | grep mmcblk0p1
 
-    SD Card Not Detected:
-        Ensure SD card was inserted before powering on 
+     umount /dev/mmcblk0p1 2>/dev/null || true
 
-Try a different SD card (some cards have compatibility issues) 
+     swapon --show | grep mmcblk0p1
 
-    Check dmesg output for SD card errors
+     swapoff /dev/mmcblk0p1 2>/dev/null || true
 
+     mkswap -f /dev/mmcblk0p1
  
 
-Partitioning Failures:
 
-    The script will attempt to recreate partition table if needed
-    Manual intervention may be required for severely corrupted cards
+Troubleshooting #2.
 
+     # WARNING: This will destroy all data on the SD card!
+     # Unmount all partitions first
+     umount /dev/mmcblk0p1 /dev/mmcblk0p2 2>/dev/null || true
+
+     # Disable any swap
+     swapoff -a 2>/dev/null || true
+
+     # Wipe the partition table
+     dd if=/dev/zero of=/dev/mmcblk0 bs=1M count=1
+     sync
+
+     # Create new partition table
+     fdisk /dev/mmcblk0 <<EOF
+     o
+     n
+     p
+     1
+
+     +1024M
+     t
+     82
+     n
+     p
+     2
+
+
+     w
+     EOF
+
+     sync
+     sleep 3
+
+     # Force kernel to re-read partition table
+     blockdev --rereadpt /dev/mmcblk0 2>/dev/null || true
+
+     # Now try creating swap again
+     mkswap /dev/mmcblk0p1
+     mkfs.ext4 -F /dev/mmcblk0p2
  
 
 Boot Problems:
@@ -69,15 +111,12 @@ Boot Problems:
     Check that delay_root is set appropriately in fstab
 
 
-    SD Card Compatibility
-
 While most SD cards should work, some users have reported issues with certain brands/models 
 
 . If you experience problems:
 
     Try a different SD card
     Use a reputable brand like SanDisk or Samsung
-    Avoid very large cards (1TB+) which may have compatibility issues 
 
 Safety Notes
 
